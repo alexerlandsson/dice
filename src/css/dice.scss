@@ -91,42 +91,42 @@ $size-half: ($size / 2);
 
 // Cube rotations
 
-@mixin rotateIE {
+@mixin rotateIE($selector) {
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     transform: none !important;
 
-    .dice__side {
+    .dice__side--#{$selector} {
       display: block;
     }
   }
 }
 
 #dice__cube.show-front {
-  @include rotateIE;
+  @include rotateIE('front');
   transform: translateZ(-($size-half)) rotateY(0deg);
 }
 
 #dice__cube.show-right {
-  @include rotateIE;
+  @include rotateIE('right');
   transform: translateZ(-($size-half)) rotateY(-90deg);
 }
 
 #dice__cube.show-back {
-  @include rotateIE;
+  @include rotateIE('back');
   transform: translateZ(-($size-half)) rotateY(-180deg);
 }
 
 #dice__cube.show-left {
-  @include rotateIE;
+  @include rotateIE('left');
   transform: translateZ(-($size-half)) rotateY(90deg);
 }
 
 #dice__cube.show-top {
-  @include rotateIE;
+  @include rotateIE('top');
   transform: translateZ(-($size-half)) rotateX(-90deg);
 }
 
 #dice__cube.show-bottom {
-  @include rotateIE;
+  @include rotateIE('bottom');
   transform: translateZ(-($size-half)) rotateX(90deg);
 }
