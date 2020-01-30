@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var minifycss = require('gulp-clean-css');
 var autoprefixer = require('gulp-autoprefixer');
+var uglify = require('gulp-uglify');
 
 var paths = {
   sass: {
@@ -53,6 +54,7 @@ gulp.task('html', function() {
 gulp.task('js', function() {
   return gulp
     .src(paths.js.src)
+    .pipe(uglify())
     .pipe(gulp.dest(paths.js.dest));
 });
 

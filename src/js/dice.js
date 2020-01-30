@@ -1,14 +1,12 @@
-$( document ).ready(function() {
+$(document).ready(function() {
 	var previous;
 
 	function randomizeNumber() {
-		//Randimizes a number between 1 and 6
 		var random = Math.floor((Math.random() * 6) + 1);
 		return random;
 	}
 
 	function rollDice(side) {
-		//Removes old class and adds the new
 		var dice = $('#dice__cube');
 		var currentClass = dice.attr('class');
 		var newClass = 'show-' + side;
@@ -25,7 +23,6 @@ $( document ).ready(function() {
 	}
 
 	$('#dice__btn').on('click ', function() {
-		//Function triggered on dice dragstop
 		var number = randomizeNumber();
 
 		if (number == 1) { rollDice('front'); }
