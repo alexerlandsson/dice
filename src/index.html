@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>alexerlandsson/dice</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="Alexander Erlandsson">
+
+    <link href="./css/dice.min.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <button id="dice__btn">Roll the dice</button>
+
+    <div class="dice__scene">
+      <div id="dice__cube" class="show-front">
+        <div class="dice__side dice__side--front"></div>
+    		<div class="dice__side dice__side--back"></div>
+    		<div class="dice__side dice__side--right"></div>
+    		<div class="dice__side dice__side--left"></div>
+    		<div class="dice__side dice__side--top"></div>
+    		<div class="dice__side dice__side--bottom"></div>
+      </div>
+    </div>
+
+    <audio preload="auto" id="dice__audio">
+    	<source src="./assets/sounds/dice-sound.mp3"></source>
+    </audio>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="./js/dice.js"></script>
+  </body>
+</html>
