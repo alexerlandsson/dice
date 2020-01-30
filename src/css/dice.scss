@@ -24,6 +24,7 @@ $size-half: ($size / 2);
   transform: translateZ(-($size-half));
   transition: transform $speed ease;
 
+  // Required since preserve-3d is not supported in IE
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     transform-style: flat;
   }
@@ -48,6 +49,7 @@ $size-half: ($size / 2);
 }
 
 @mixin sideIE {
+  // Required since preserve-3d is not supported in IE
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     transform: none !important;
   }
@@ -92,6 +94,7 @@ $size-half: ($size / 2);
 // Cube rotations
 
 @mixin rotateIE($selector) {
+  // Required since preserve-3d is not supported in IE
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     transform: none !important;
 
