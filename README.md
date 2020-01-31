@@ -2,6 +2,8 @@
 
 Rotating CSS dice in 3D using jQuery. Based on my old CodePen [Roll the dice!](https://codepen.io/alexerlandsson/pen/yyWdLE).
 
+**Demo:** https://alexerlandsson.github.io/dice/
+
 ## How to use
 
 Include `/docs/css/dice.min.css`, `/docs/js/dice.js` in your project and copy the HTML from `/docs/index.html`. Please note the JavaScript requires jQuery to work.
