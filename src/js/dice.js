@@ -9,8 +9,8 @@ $(document).ready(function() {
   var dice = $('#dice__cube');
   var animationSpeed = dice.css('transition-duration').split(',')[0].replace(/[^-\d\.]/g, '') * 1000;
 
-	function randomizeNumber() {
-		var random = Math.floor((Math.random() * 6) + 1);
+	function randomizeNumber(low, high) {
+		var random = Math.floor((Math.random() * high) + low);
 		return random;
 	}
 
@@ -23,7 +23,7 @@ $(document).ready(function() {
     if (currentClass == newClass) {
 			dice.addClass(newClass + ' show-same');
 
-      // Remove repeatable class after animation is done
+      // Remove animation class after animation has finished
       setTimeout(function() {
         dice.removeClass('show-same');
       }, animationSpeed);
@@ -42,7 +42,7 @@ $(document).ready(function() {
 	}
 
 	$('#dice__btn').on('click ', function() {
-		var number = randomizeNumber();
+		var number = randomizeNumber(1, 6);
 
 		if (number == 1) { rollDice('front'); }
 		else if (number == 2) { rollDice('back'); }
