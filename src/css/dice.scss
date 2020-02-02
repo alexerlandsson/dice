@@ -1,20 +1,43 @@
-// Settings
-$size: 70px;
-$speed: 500ms;
-$image-path: '../assets/images/';
+/*!
+ * Dice (https://github.com/alexerlandsson/dice)
+ * Copyright 2020 Alexander Erlandsson
+ * Licensed under MIT
+ */
 
-// Variables (do not change)
-$size-half: ($size / 2);
+// Settings
+// Change these settings to fit your project
+
+$dice-size: 70px;
+$animation-speed: 500ms;
+$image-path: '../assets/images/';
+$ie-fallback: true;
+
+// DO NOT CHANGE ANYTHING BELOW!
+
+// Variables
+
+$size-half: ($dice-size / 2);
 
 // Scene
 
 .dice__scene {
-  width: $size;
-  height: $size;
-  perspective: ($size * 3);
+  width: $dice-size;
+  height: $dice-size;
+  perspective: ($dice-size * 3);
 }
 
 // Cube
+
+@mixin ieFallbackRotate($selector) {
+  @if $ie-fallback {
+    // Toggles active side with display since preserve-3d is not supported in IE
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      .dice__side--#{$selector} {
+        display: block;
+      }
+    }
+  }
+}
 
 #dice__cube {
   position: relative;
@@ -22,11 +45,108 @@ $size-half: ($size / 2);
   height: 100%;
   transform-style: preserve-3d;
   transform: translateZ(-($size-half));
-  transition: transform $speed ease;
+  transition: transform $animation-speed ease;
 
-  // Required since preserve-3d is not supported in IE
-  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    transform-style: flat;
+  @if $ie-fallback {
+    // Required since preserve-3d is not supported in IE
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      transform-style: flat;
+      transform: none !important;
+    }
+  }
+
+  // Rotation if dice hit same number twice
+
+  @keyframes showSameFont {
+    100% {
+      transform: translateZ(-($size-half)) rotateY(360deg);
+    }
+  }
+
+  @keyframes showSameRight {
+    100% {
+      transform: translateZ(-($size-half)) rotateY(-450deg);
+    }
+  }
+
+  @keyframes showSameBack {
+    100% {
+      transform: translateZ(-($size-half)) rotateY(-540deg);
+    }
+  }
+
+  @keyframes showSameLeft {
+    100% {
+      transform: translateZ(-($size-half)) rotateY(450deg);
+    }
+  }
+
+  @keyframes showSameTop {
+    100% {
+      transform: translateZ(-($size-half)) rotateX(-450deg);
+    }
+  }
+
+  @keyframes showSameBottom {
+    100% {
+      transform: translateZ(-($size-half)) rotateX(450deg);
+    }
+  }
+
+  // Dice rotation
+
+  &.show-front {
+    @include ieFallbackRotate('front');
+    transform: translateZ(-($size-half)) rotateY(0deg);
+
+    &.show-same {
+      animation: showSameFont $animation-speed ease;
+    }
+  }
+
+  &.show-right {
+    @include ieFallbackRotate('right');
+    transform: translateZ(-($size-half)) rotateY(-90deg);
+
+    &.show-same {
+      animation: showSameRight $animation-speed ease;
+    }
+  }
+
+  &.show-back {
+    @include ieFallbackRotate('back');
+    transform: translateZ(-($size-half)) rotateY(-180deg);
+
+    &.show-same {
+      animation: showSameBack $animation-speed ease;
+    }
+  }
+
+  &.show-left {
+    @include ieFallbackRotate('left');
+    transform: translateZ(-($size-half)) rotateY(90deg);
+
+    &.show-same {
+      animation: showSameLeft $animation-speed ease;
+    }
+  }
+
+  &.show-top {
+    @include ieFallbackRotate('top');
+    transform: translateZ(-($size-half)) rotateX(-90deg);
+
+    &.show-same {
+      animation: showSameTop $animation-speed ease;
+    }
+  }
+
+  &.show-bottom {
+    @include ieFallbackRotate('bottom');
+    transform: translateZ(-($size-half)) rotateX(90deg);
+
+    &.show-same {
+      animation: showSameBottom $animation-speed ease;
+    }
   }
 }
 
@@ -40,96 +160,44 @@ $size-half: ($size / 2);
   background-position: center;
   background-repeat: no-repeat;
   background-color: #fff;
-  box-shadow: inset 0 0 ($size / 10) rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 ($dice-size / 10) rgba(0, 0, 0, 0.1);
   user-select: none;
 
-  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    display: none;
-  }
-}
-
-@mixin sideIE {
-  // Required since preserve-3d is not supported in IE
-  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    transform: none !important;
+  @if $ie-fallback {
+    // Toggles active side with display since preserve-3d is not supported in IE
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display: none;
+      transform: none !important;
+    }
   }
 }
 
 .dice__side--front  {
-  @include sideIE;
   transform: rotateY(0deg) translateZ($size-half);
   background-image: url('#{$image-path}dice-1.png');
 }
 
 .dice__side--back {
-  @include sideIE;
   transform: rotateY(180deg) translateZ($size-half);
   background-image: url('#{$image-path}dice-6.png');
 }
 
 .dice__side--right {
-  @include sideIE;
   transform: rotateY(90deg) translateZ($size-half);
   background-image: url('#{$image-path}dice-4.png');
 }
 
 .dice__side--left {
-  @include sideIE;
   transform: rotateY(-90deg) translateZ($size-half);
   background-image: url('#{$image-path}dice-3.png');
 }
 
 .dice__side--top {
-  @include sideIE;
   transform: rotateX(90deg) translateZ($size-half);
   background-image: url('#{$image-path}dice-2.png');
 }
 
 .dice__side--bottom {
-  @include sideIE;
   transform: rotateX(-90deg) translateZ($size-half);
   background-image: url('#{$image-path}dice-5.png');
-}
-
-// Cube rotations
-
-@mixin rotateIE($selector) {
-  // Required since preserve-3d is not supported in IE
-  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    transform: none !important;
-
-    .dice__side--#{$selector} {
-      display: block;
-    }
-  }
-}
-
-#dice__cube.show-front {
-  @include rotateIE('front');
-  transform: translateZ(-($size-half)) rotateY(0deg);
-}
-
-#dice__cube.show-right {
-  @include rotateIE('right');
-  transform: translateZ(-($size-half)) rotateY(-90deg);
-}
-
-#dice__cube.show-back {
-  @include rotateIE('back');
-  transform: translateZ(-($size-half)) rotateY(-180deg);
-}
-
-#dice__cube.show-left {
-  @include rotateIE('left');
-  transform: translateZ(-($size-half)) rotateY(90deg);
-}
-
-#dice__cube.show-top {
-  @include rotateIE('top');
-  transform: translateZ(-($size-half)) rotateX(-90deg);
-}
-
-#dice__cube.show-bottom {
-  @include rotateIE('bottom');
-  transform: translateZ(-($size-half)) rotateX(90deg);
 }

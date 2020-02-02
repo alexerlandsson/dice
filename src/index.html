@@ -9,11 +9,51 @@
     <meta name="author" content="Alexander Erlandsson">
 
     <link href="./css/dice.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: linear-gradient(45deg, #004b1a, #267a46);
+        margin: 0;
+        font-family: sans-serif;
+      }
+
+      .demo__button {
+        margin-top: 20px;
+      }
+
+      .demo__footer {
+        position: fixed;
+        bottom: 20px;
+      }
+
+      .demo__link {
+        color: #000;
+        text-decoration: none;
+      }
+
+      .demo__link:hover {
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
 
-    <button id="dice__btn">Roll the dice</button>
-
+    <!-- Dice -->
     <div class="dice__scene">
       <div id="dice__cube" class="show-front">
         <div class="dice__side dice__side--front"></div>
@@ -28,6 +68,13 @@
     <audio preload="auto" id="dice__audio">
     	<source src="./assets/sounds/dice-sound.mp3"></source>
     </audio>
+    <!-- /Dice -->
+
+    <button class="demo__button" id="dice__btn">Roll the dice</button>
+
+    <footer class="demo__footer">
+      <a href="https://github.com/alexerlandsson/dice" title="Back to GitHub repository" class="demo__link">Back to GitHub</a>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
     <script src="./js/dice.js"></script>

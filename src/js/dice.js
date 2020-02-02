@@ -1,3 +1,9 @@
+/*
+ * Dice (https://github.com/alexerlandsson/dice)
+ * Copyright 2020 Alexander Erlandsson
+ * Licensed under MIT
+ */
+
 $(document).ready(function() {
 	var previous;
 
@@ -12,7 +18,12 @@ $(document).ready(function() {
 		var newClass = 'show-' + side;
 
 		dice.removeClass();
-		dice.addClass(newClass);
+
+    if (currentClass == newClass) {
+			dice.addClass(newClass + ' show-same');
+		} else {
+      dice.addClass(newClass);
+    }
 	}
 
 	function soundEffect() {
