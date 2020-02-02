@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function() {
-	var previous;
+	var history = [];
 
 	function randomizeNumber() {
 		var random = Math.floor((Math.random() * 6) + 1);
@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 	function rollDice(side) {
 		var dice = $('#dice__cube');
-		var currentClass = dice.attr('class');
+		var currentClass = dice.attr('class').split(' ')[0];
 		var newClass = 'show-' + side;
 
 		dice.removeClass();
@@ -24,6 +24,8 @@ $(document).ready(function() {
 		} else {
       dice.addClass(newClass);
     }
+
+    history.push(side);
 	}
 
 	function soundEffect() {
