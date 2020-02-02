@@ -45,7 +45,8 @@ $size-half: ($dice-size / 2);
   height: 100%;
   transform-style: preserve-3d;
   transform: translateZ(-($size-half));
-  transition: transform $animation-speed ease;
+  transition: transform ease;
+  transition-duration: $animation-speed;
 
   @if $ie-fallback {
     // Required since preserve-3d is not supported in IE

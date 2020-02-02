@@ -5,7 +5,9 @@
  */
 
 $(document).ready(function() {
-	var history = [];
+  var history = [];
+  var dice = $('#dice__cube');
+  var animationSpeed = dice.css('transition-duration').split(',')[0].replace(/[^-\d\.]/g, '') * 1000;
 
 	function randomizeNumber() {
 		var random = Math.floor((Math.random() * 6) + 1);
@@ -13,7 +15,6 @@ $(document).ready(function() {
 	}
 
 	function rollDice(side) {
-		var dice = $('#dice__cube');
 		var currentClass = dice.attr('class').split(' ')[0];
 		var newClass = 'show-' + side;
 
@@ -21,6 +22,11 @@ $(document).ready(function() {
 
     if (currentClass == newClass) {
 			dice.addClass(newClass + ' show-same');
+
+      // Remove repeatable class after animation is done
+      setTimeout(function() {
+        dice.removeClass('show-same');
+      }, animationSpeed);
 		} else {
       dice.addClass(newClass);
     }
